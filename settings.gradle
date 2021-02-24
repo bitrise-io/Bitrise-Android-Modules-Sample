@@ -1,0 +1,4 @@
+include ':feature:example'
+include ':lib-example'
+include ':app'
+rootProject.name = "Bitrise Sample"
