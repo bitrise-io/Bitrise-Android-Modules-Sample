@@ -1,0 +1,38 @@
+---
+format_version: '8'
+default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+project_type: android
+trigger_map: []
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - cache-pull@2: {}
+    - android-unit-test@1:
+        inputs:
+        - project_location: $PROJECT_LOCATION
+        - variant: debug
+    - gradle-runner@1:
+        title: Run pure Kotlin module tests
+        inputs:
+        - gradle_options: '--stacktrace'
+        - gradlew_path: ./gradlew
+        - gradle_task: ':lib-example:test'
+    - custom-test-results-export@0:
+        title: Export pure Kotlin module test results to Test Reports add-on
+        inputs:
+        - base_path: $BITRISE_SOURCE_DIR/lib-example/build/test-results
+        - search_pattern: '*.xml'
+        - test_name: ':lib-example'
+    - deploy-to-bitrise-io@1: {}
+    - cache-push@2: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    PROJECT_LOCATION: .
+  - opts:
+      is_expand: false
+    MODULE: app
