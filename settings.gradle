@@ -1,4 +1,5 @@
-include ':feature:example'
+include ':feature:example1'
+include ':feature:example2'
 include ':lib-example'
 include ':app'
 rootProject.name = "Bitrise Sample"
