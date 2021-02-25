@@ -23,8 +23,8 @@ The project consists of the following modules:
 ![Primary workflow](docs/workflow-primary.png)
 </details>
 
-This workflow runs unit tests in every module. The [Android Unit Test](https://www.bitrise.io/integrations/steps/android-unit-test) discovers tests in every _Android module_, and exports test results both as build artifacts and for the [Test Reports add-on](https://www.bitrise.io/add-ons/mobile-test-reporting).
+This workflow runs unit tests in every module. The [Android Unit Test](https://www.bitrise.io/integrations/steps/android-unit-test) step discovers tests in every _Android module_, and exports test results both as build artifacts and for the [Test Reports add-on](https://www.bitrise.io/add-ons/mobile-test-reporting).
 
 For pure Java/Kotlin modules, a [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner) step is used to run the `:lib-example:test` Gradle task. Test results are exported via the [Custom test results](https://www.bitrise.io/integrations/steps/custom-test-results-export) step. This step collects the JUnit test result XML from the module's build folder, and makes the report available via the Test Reports add-on.
 
-__Note:__ if your project doesn't have any pure Java/Kotlin modules, you can remove the _Gradle Runner_ and _Custom test results_ steps from your workflow.
+__Note:__ if your project doesn't have any pure Java/Kotlin modules, you can remove the _Gradle Runner_ and _Custom test results_ steps from your workflow. The Android Unit Test step takes care of testing Android modules.
