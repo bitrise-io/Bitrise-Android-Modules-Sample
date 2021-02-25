@@ -32,6 +32,9 @@ android {
 }
 
 dependencies {
+    implementation project(":lib-example")
+    implementation project(":feature:example1")
+    implementation project(":feature:example2")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
