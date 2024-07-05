@@ -1,5 +1,5 @@
 ---
-format_version: '8'
+format_version: '13'
 default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
 project_type: android
 trigger_map:
@@ -10,8 +10,8 @@ workflows:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4: {}
-    - cache-pull@2: {}
+    - git-clone@8: {}
+    - restore-gradle-cache@2: {}
     - android-unit-test@1:
         inputs:
         - project_location: $PROJECT_LOCATION
@@ -28,8 +28,8 @@ workflows:
         - base_path: $BITRISE_SOURCE_DIR/lib-example/build/test-results
         - search_pattern: '*.xml'
         - test_name: ':lib-example'
-    - deploy-to-bitrise-io@1: {}
-    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+    - save-gradle-cache@1: {}
 app:
   envs:
   - opts:
