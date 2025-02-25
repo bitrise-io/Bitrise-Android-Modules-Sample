@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
+    namespace = "io.bitrise.sample.android"
+    compileSdk 34
 
     defaultConfig {
         applicationId "io.bitrise.sample.android"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
